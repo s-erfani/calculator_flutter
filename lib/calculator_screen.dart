@@ -88,17 +88,20 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: Text(
-                      result,
-                      style: TextStyle(fontSize: 32),
+              child: FittedBox(
+                alignment: Alignment.centerRight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: Text(
+                        result,
+                        style: TextStyle(fontSize: 32),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 16),
