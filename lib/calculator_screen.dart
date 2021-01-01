@@ -25,8 +25,17 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           symbol == "-" ||
           symbol == "*" ||
           symbol == "/") {
-        a = result;
-        result += symbol;
+        if (result.endsWith("+") ||
+            result.endsWith("-") ||
+            result.endsWith("/") ||
+            result.endsWith("*")) {
+          result = result.substring(0, result.length - 1);
+          a = result;
+          result += symbol;
+        } else {
+          a = result;
+          result += symbol;
+        }
       } else if (symbol == "=") {
         try {
           if (result.contains("+")) {
