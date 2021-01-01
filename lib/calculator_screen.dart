@@ -42,16 +42,16 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             a = (double.parse(a) + double.parse(b)).toString();
             result = a.endsWith(".0") ? a.substring(0, a.length - 2) : a;
             b = "";
-          } else if (result.contains("-")) {
-            a = (double.parse(a) - double.parse(b)).toString();
-            result = a.endsWith(".0") ? a.substring(0, a.length - 2) : a;
-            b = "";
           } else if (result.contains("*")) {
             a = (double.parse(a) * double.parse(b)).toString();
             result = a.endsWith(".0") ? a.substring(0, a.length - 2) : a;
             b = "";
           } else if (result.contains("/")) {
             a = (double.parse(a) / double.parse(b)).toString();
+            result = a.endsWith(".0") ? a.substring(0, a.length - 2) : a;
+            b = "";
+          } else if (result.contains("-")) {
+            a = (double.parse(a) - double.parse(b)).toString();
             result = a.endsWith(".0") ? a.substring(0, a.length - 2) : a;
             b = "";
           }
