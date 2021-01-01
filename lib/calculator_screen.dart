@@ -54,9 +54,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           print(e);
         }
       } else if (symbol == ".") {
-        b = b + symbol;
-        result += symbol;
+        // TODO
       } else if (symbol == "+/-") {
+        // TODO
       } else {
         if (result.contains("+") ||
             result.contains("/") ||
