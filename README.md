@@ -1,6 +1,6 @@
 # calculator_flutter
 
-A new Flutter application.
+Simple Calculator. 4 operators between 2 numbers.
 
 ## Getting Started
 

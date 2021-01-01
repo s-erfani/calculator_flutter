@@ -12,11 +12,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
   onPress(String symbol) {
     setState(() {
-      if (symbol == "CE") {
-        result = "0";
-        a = "";
-        b = "";
-      } else if (symbol == "C") {
+      if (symbol == "CE" || symbol == "C") {
         result = "0";
         a = "";
         b = "";
@@ -33,6 +29,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         result += symbol;
       } else if (symbol == "=") {
         try {
+          print(a);
+          print(b);
           if (result.contains("+")) {
             result = (double.parse(a) + double.parse(b)).toString();
             a = result;
@@ -54,6 +52,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           print(e);
         }
       } else if (symbol == ".") {
+        b = b + symbol;
+        result += symbol;
       } else if (symbol == "+/-") {
       } else {
         if (result.contains("+") ||
