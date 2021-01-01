@@ -49,6 +49,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             b = "";
           }
         } catch (e) {
+          result = "error";
           print(e);
         }
       } else if (symbol == ".") {
