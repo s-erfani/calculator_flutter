@@ -9,11 +9,14 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
   String result = "0";
   String a = "";
   String b = "";
-  void calculate(String symbol) {
+  int opCounter = 0;
+
+  void calculate() {
     print("a: $a");
     print("b: $b");
     print("result: $result");
     try {
+      opCounter = 0;
       if (b != "") {
         if (result.contains("+")) {
           a = (double.parse(a) + double.parse(b)).toString();
@@ -39,11 +42,13 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
         result = "0";
         a = "";
         b = "";
+        opCounter = 0;
       }
       if (symbol == "CE" || symbol == "C") {
         result = "0";
         a = "";
         b = "";
+        opCounter = 0;
       } else if (symbol == "del") {
         result = result.substring(0, result.length - 1);
         if (result == "") {
@@ -53,12 +58,6 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
           symbol == "-" ||
           symbol == "*" ||
           symbol == "/") {
-        // if ((result.contains("+") && !result.endsWith("+")) ||
-        //     (result.contains("*") && !result.endsWith("*")) ||
-        //     (result.contains("/") && !result.endsWith("/")) ||
-        //     (result.contains("-") && !result.endsWith("-"))) {
-        //   calculate();
-        // }
         if (result.endsWith("+") ||
             result.endsWith("-") ||
             result.endsWith("/") ||
@@ -67,16 +66,32 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
           a = result;
           result += symbol;
         } else {
-          a = result;
-          result += symbol;
+          if (opCounter == 0) {
+            opCounter++;
+            a = result;
+            result += symbol;
+          } else {
+            calculate();
+            opCounter++;
+            result += symbol;
+          }
         }
       } else if (symbol == "=") {
-        calculate(symbol);
+        calculate();
       } else if (symbol == ".") {
         // TODO
       } else if (symbol == "+/-") {
         // TODO
-      } else {
+      } else if (symbol == "0" ||
+          symbol == "1" ||
+          symbol == "2" ||
+          symbol == "3" ||
+          symbol == "4" ||
+          symbol == "5" ||
+          symbol == "6" ||
+          symbol == "7" ||
+          symbol == "8" ||
+          symbol == "9") {
         if (result.contains("+") ||
             result.contains("/") ||
             result.contains("-") ||
