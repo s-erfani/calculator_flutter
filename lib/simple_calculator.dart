@@ -1,17 +1,43 @@
 import 'package:flutter/material.dart';
 
-class CalculatorScreen extends StatefulWidget {
+class SimpleCalculator extends StatefulWidget {
   @override
-  _CalculatorScreenState createState() => _CalculatorScreenState();
+  _SimpleCalculatorState createState() => _SimpleCalculatorState();
 }
 
-class _CalculatorScreenState extends State<CalculatorScreen> {
+class _SimpleCalculatorState extends State<SimpleCalculator> {
   String result = "0";
   String a = "";
   String b = "";
+  void calculate(String symbol) {
+    print("a: $a");
+    print("b: $b");
+    print("result: $result");
+    try {
+      if (result.contains("+")) {
+        a = (double.parse(a) + double.parse(b)).toString();
+      } else if (result.contains("*")) {
+        a = (double.parse(a) * double.parse(b)).toString();
+      } else if (result.contains("/")) {
+        a = (double.parse(a) / double.parse(b)).toString();
+      } else if (result.contains("-")) {
+        a = (double.parse(a) - double.parse(b)).toString();
+      }
+      result = a.endsWith(".0") ? a.substring(0, a.length - 2) : a;
+      b = "";
+    } catch (e) {
+      result = "error";
+      print(e);
+    }
+  }
 
   onPress(String symbol) {
     setState(() {
+      if (result == "error") {
+        result = "0";
+        a = "";
+        b = "";
+      }
       if (symbol == "CE" || symbol == "C") {
         result = "0";
         a = "";
@@ -25,6 +51,12 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           symbol == "-" ||
           symbol == "*" ||
           symbol == "/") {
+        // if ((result.contains("+") && !result.endsWith("+")) ||
+        //     (result.contains("*") && !result.endsWith("*")) ||
+        //     (result.contains("/") && !result.endsWith("/")) ||
+        //     (result.contains("-") && !result.endsWith("-"))) {
+        //   calculate();
+        // }
         if (result.endsWith("+") ||
             result.endsWith("-") ||
             result.endsWith("/") ||
@@ -37,22 +69,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           result += symbol;
         }
       } else if (symbol == "=") {
-        try {
-          if (result.contains("+")) {
-            a = (double.parse(a) + double.parse(b)).toString();
-          } else if (result.contains("*")) {
-            a = (double.parse(a) * double.parse(b)).toString();
-          } else if (result.contains("/")) {
-            a = (double.parse(a) / double.parse(b)).toString();
-          } else if (result.contains("-")) {
-            a = (double.parse(a) - double.parse(b)).toString();
-          }
-          result = a.endsWith(".0") ? a.substring(0, a.length - 2) : a;
-          b = "";
-        } catch (e) {
-          result = "error";
-          print(e);
-        }
+        calculate(symbol);
       } else if (symbol == ".") {
         // TODO
       } else if (symbol == "+/-") {

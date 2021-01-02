@@ -1,4 +1,4 @@
-import 'package:calculator_flutter/calculator_screen.dart';
+import 'package:calculator_flutter/simple_calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     ]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CalculatorScreen(),
+      home: SimpleCalculator(),
     );
   }
 }
