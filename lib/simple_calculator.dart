@@ -50,7 +50,6 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
         b = "";
         opCounter = 0;
       } else if (symbol == "del") {
-        result = result.substring(0, result.length - 1);
         if (result == "") {
           result = "0";
         }
@@ -79,7 +78,14 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
       } else if (symbol == "=") {
         calculate();
       } else if (symbol == ".") {
-        // TODO
+        if (!a.contains(".") && opCounter == 0) {
+          result += symbol;
+          a += symbol;
+        }
+        if (!b.contains(".") && opCounter == 1 && b != "") {
+          result += symbol;
+          b += symbol;
+        }
       } else if (symbol == "+/-") {
         // TODO
       } else if (symbol == "0" ||
@@ -101,8 +107,10 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
         } else {
           if (result == "0") {
             result = symbol;
+            a = result;
           } else {
             result = result + symbol;
+            a = result;
           }
         }
       }
