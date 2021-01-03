@@ -50,6 +50,14 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
         b = "";
         opCounter = 0;
       } else if (symbol == "del") {
+        if (result.endsWith("+") ||
+            result.endsWith("-") ||
+            result.endsWith("*") ||
+            result.endsWith("/")) opCounter = 0;
+
+        result = result.substring(0, result.length - 1);
+
+        if (opCounter == 1 && b != "") b = b.substring(0, b.length - 1);
         if (result == "") {
           result = "0";
         }
