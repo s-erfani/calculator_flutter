@@ -94,7 +94,7 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
           result += symbol;
           b += symbol;
         }
-      } else if (symbol == "+/-") {
+      } else if (symbol == "±") {
         // TODO
       } else if (symbol == "0" ||
           symbol == "1" ||
@@ -175,7 +175,7 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
                   calculatorButton("2"),
                   calculatorButton("3"),
                   calculatorButton("+"),
-                  calculatorButton("+/-"),
+                  calculatorButton("±"),
                   calculatorButton("0"),
                   calculatorButton("."),
                   calculatorButton("="),
