@@ -11,6 +11,8 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
   String b = "";
   int opCounter = 0;
 
+  static const minus = "\u2011";
+
   void calculate() {
     print("a: $a");
     print("b: $b");
@@ -57,7 +59,10 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
 
         result = result.substring(0, result.length - 1);
 
+        if (opCounter == 0) a = result;
+
         if (opCounter == 1 && b != "") b = b.substring(0, b.length - 1);
+
         if (result == "") {
           result = "0";
         }
@@ -95,7 +100,9 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
           b += symbol;
         }
       } else if (symbol == "±") {
-        // TODO
+        // print("\u2011");
+        // print("-");
+        // if ("\u2011" == "-") print(true);
       } else if (symbol == "0" ||
           symbol == "1" ||
           symbol == "2" ||
