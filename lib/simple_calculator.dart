@@ -26,7 +26,7 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
           a = (double.parse(a) * double.parse(b)).toString();
         } else if (result.contains("/")) {
           a = (double.parse(a) / double.parse(b)).toString();
-        } else if (result.contains("-")) {
+        } else if (result.contains(minus)) {
           a = (double.parse(a) - double.parse(b)).toString();
         }
         result = a.endsWith(".0") ? a.substring(0, a.length - 2) : a;
@@ -53,7 +53,7 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
         opCounter = 0;
       } else if (symbol == "del") {
         if (result.endsWith("+") ||
-            result.endsWith("-") ||
+            result.endsWith(minus) ||
             result.endsWith("*") ||
             result.endsWith("/")) opCounter = 0;
 
@@ -62,16 +62,19 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
         if (opCounter == 0) a = result;
 
         if (opCounter == 1 && b != "") b = b.substring(0, b.length - 1);
-
+        if (result.endsWith("-")) {
+          result = result.substring(0, result.length - 1);
+          if (opCounter == 1) b = b.substring(0, b.length - 1);
+        }
         if (result == "") {
           result = "0";
         }
       } else if (symbol == "+" ||
-          symbol == "-" ||
+          symbol == minus ||
           symbol == "*" ||
           symbol == "/") {
         if (result.endsWith("+") ||
-            result.endsWith("-") ||
+            result.endsWith(minus) ||
             result.endsWith("/") ||
             result.endsWith("*")) {
           result = result.substring(0, result.length - 1);
@@ -100,9 +103,15 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
           b += symbol;
         }
       } else if (symbol == "±") {
-        // print("\u2011");
-        // print("-");
-        // if ("\u2011" == "-") print(true);
+        if (opCounter == 0) {
+          result = (num.parse(result) * -1).toString();
+          a = result;
+        }
+        if (opCounter == 1 && b != "") {
+          result = result.substring(0, result.length - b.length);
+          b = (num.parse(b) * -1).toString();
+          result += b;
+        }
       } else if (symbol == "0" ||
           symbol == "1" ||
           symbol == "2" ||
@@ -115,7 +124,7 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
           symbol == "9") {
         if (result.contains("+") ||
             result.contains("/") ||
-            result.contains("-") ||
+            result.contains(minus) ||
             result.contains("*")) {
           b = b + symbol;
           result += symbol;
@@ -177,7 +186,7 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
                   calculatorButton("4"),
                   calculatorButton("5"),
                   calculatorButton("6"),
-                  calculatorButton("-"),
+                  calculatorButton(minus),
                   calculatorButton("1"),
                   calculatorButton("2"),
                   calculatorButton("3"),
